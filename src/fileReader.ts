@@ -64,7 +64,7 @@ export class FileReader {
                 jsonData = xml.xml2js(data![0]);
             } catch (err) {
                 console.error(`Could not parse xml of ${file} - Skipping this map!`);
-                return;
+                continue;
             }
             
             result.push({
