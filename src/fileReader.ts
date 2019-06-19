@@ -58,8 +58,15 @@ export class FileReader {
 
             const data = content.match(regxp);
 
-            const jsonData = xml.xml2js(data![0]);
+            let jsonData;
 
+            try {
+                jsonData = xml.xml2js(data![0]);
+            } catch (err) {
+                console.error(`Could not parse xml of ${file} - Skipping this map!`);
+                return;
+            }
+            
             result.push({
                 challenge: {
                     file: file.substring(file.indexOf('Tracks\\') + 7), // Removes unnecessary parts of the file path
